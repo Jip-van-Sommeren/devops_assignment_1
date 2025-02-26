@@ -25,11 +25,11 @@ paths:
           style: simple
           explode: false
           schema:
-            type: string
-            format: uuid
+            type: number
+            format: integer
       responses:
         "200":
-          description: Successful operation
+          description: "Successful operation"
           content:
             application/json:
               schema:
@@ -52,27 +52,21 @@ paths:
           style: simple
           explode: false
           schema:
-            type: string
-            format: uuid
+            type: number
+            format: intger
       responses:
         "200":
-          description: Student deleted successfully.
+          description: "Successful operation"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inline_response_200"
+                type: object
+                format: Student
+                x-content-type: application/json
         "400":
-          description: Bad Request. The provided student_id is invalid.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/inline_response_400"
+          description: "Bad Request"
         "404":
-          description: Not Found. No student with the specified student_id exists.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/inline_response_404"
+          description: "Student with specified student_id cannot be found"
       x-openapi-router-controller: swagger_server.controllers.default_controller
   /student:
     post:
@@ -97,7 +91,7 @@ paths:
         "400":
           description: "invalid input, object invalid"
         "409":
-          description: Already exists
+          description: "Already exists"
       x-openapi-router-controller: swagger_server.controllers.default_controller
 components:
   schemas:
@@ -108,7 +102,8 @@ components:
       type: object
       properties:
         student_id:
-          type: string
+          type: number
+          format: integer
         first_name:
           type: string
         last_name:
