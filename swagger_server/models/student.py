@@ -15,11 +15,18 @@ class Student(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, student_id: float=None, first_name: str=None, last_name: str=None, grade_records: List[GradeRecord]=None):  # noqa: E501
+
+    def __init__(
+        self,
+        student_id: str = None,
+        first_name: str = None,
+        last_name: str = None,
+        grade_records: List[GradeRecord] = None,
+    ):  # noqa: E501
         """Student - a model defined in Swagger
 
         :param student_id: The student_id of this Student.  # noqa: E501
-        :type student_id: float
+        :type student_id: str
         :param first_name: The first_name of this Student.  # noqa: E501
         :type first_name: str
         :param last_name: The last_name of this Student.  # noqa: E501
@@ -28,17 +35,17 @@ class Student(Model):
         :type grade_records: List[GradeRecord]
         """
         self.swagger_types = {
-            'student_id': float,
-            'first_name': str,
-            'last_name': str,
-            'grade_records': List[GradeRecord]
+            "student_id": str,
+            "first_name": str,
+            "last_name": str,
+            "grade_records": List[GradeRecord],
         }
 
         self.attribute_map = {
-            'student_id': 'student_id',
-            'first_name': 'first_name',
-            'last_name': 'last_name',
-            'grade_records': 'grade_records'
+            "student_id": "student_id",
+            "first_name": "first_name",
+            "last_name": "last_name",
+            "grade_records": "grade_records",
         }
         self._student_id = student_id
         self._first_name = first_name
@@ -46,7 +53,7 @@ class Student(Model):
         self._grade_records = grade_records
 
     @classmethod
-    def from_dict(cls, dikt) -> 'Student':
+    def from_dict(cls, dikt) -> "Student":
         """Returns the dict as a model
 
         :param dikt: A dict.
@@ -57,22 +64,22 @@ class Student(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def student_id(self) -> float:
+    def student_id(self) -> str:
         """Gets the student_id of this Student.
 
 
         :return: The student_id of this Student.
-        :rtype: float
+        :rtype: str
         """
         return self._student_id
 
     @student_id.setter
-    def student_id(self, student_id: float):
+    def student_id(self, student_id: str):
         """Sets the student_id of this Student.
 
 
         :param student_id: The student_id of this Student.
-        :type student_id: float
+        :type student_id: str
         """
 
         self._student_id = student_id
@@ -96,7 +103,9 @@ class Student(Model):
         :type first_name: str
         """
         if first_name is None:
-            raise ValueError("Invalid value for `first_name`, must not be `None`")  # noqa: E501
+            raise ValueError(
+                "Invalid value for `first_name`, must not be `None`"
+            )  # noqa: E501
 
         self._first_name = first_name
 
@@ -119,7 +128,9 @@ class Student(Model):
         :type last_name: str
         """
         if last_name is None:
-            raise ValueError("Invalid value for `last_name`, must not be `None`")  # noqa: E501
+            raise ValueError(
+                "Invalid value for `last_name`, must not be `None`"
+            )  # noqa: E501
 
         self._last_name = last_name
 

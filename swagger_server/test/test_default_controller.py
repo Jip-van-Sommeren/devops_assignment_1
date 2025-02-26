@@ -22,7 +22,7 @@ class TestDefaultController(BaseTestCase):
         """
         body = Student()
         response = self.client.open(
-            '/JipvanSommeren/Assignment1API/1.0.0/student',
+            '/tutorial/1.0.0/student',
             method='POST',
             data=json.dumps(body),
             content_type='application/json')
@@ -35,7 +35,7 @@ class TestDefaultController(BaseTestCase):
         deletes a student
         """
         response = self.client.open(
-            '/JipvanSommeren/Assignment1API/1.0.0/student/{student_id}'.format(student_id=1.2),
+            '/tutorial/1.0.0/student/{student_id}'.format(student_id='38400000-8cf0-11bd-b23e-10b96e4ef00d'),
             method='DELETE')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))
@@ -46,7 +46,7 @@ class TestDefaultController(BaseTestCase):
         gets student
         """
         response = self.client.open(
-            '/JipvanSommeren/Assignment1API/1.0.0/student/{student_id}'.format(student_id='38400000-8cf0-11bd-b23e-10b96e4ef00d'),
+            '/tutorial/1.0.0/student/{student_id}'.format(student_id='38400000-8cf0-11bd-b23e-10b96e4ef00d'),
             method='GET')
         self.assert200(response,
                        'Response body is : ' + response.data.decode('utf-8'))

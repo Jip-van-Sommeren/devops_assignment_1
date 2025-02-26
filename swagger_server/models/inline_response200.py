@@ -14,23 +14,20 @@ class InlineResponse200(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, message: str=None):  # noqa: E501
+
+    def __init__(self, message: str = None):  # noqa: E501
         """InlineResponse200 - a model defined in Swagger
 
         :param message: The message of this InlineResponse200.  # noqa: E501
         :type message: str
         """
-        self.swagger_types = {
-            'message': str
-        }
+        self.swagger_types = {"message": str}
 
-        self.attribute_map = {
-            'message': 'message'
-        }
+        self.attribute_map = {"message": "message"}
         self._message = message
 
     @classmethod
-    def from_dict(cls, dikt) -> 'InlineResponse200':
+    def from_dict(cls, dikt) -> "InlineResponse200":
         """Returns the dict as a model
 
         :param dikt: A dict.

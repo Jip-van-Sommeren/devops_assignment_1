@@ -2,15 +2,7 @@ import connexion
 
 # import six
 
-# from swagger_server.models.inline_response200 import (
-#     InlineResponse200,
-# )  # noqa: E501
-# from swagger_server.models.inline_response400 import (
-#     InlineResponse400,
-# )  # noqa: E501
-# from swagger_server.models.inline_response404 import (
-#     InlineResponse404,
-# )  # noqa: E501
+
 from swagger_server.models.student import Student  # noqa: E501
 
 # from swagger_server import util
@@ -27,7 +19,7 @@ def add_student(body=None):  # noqa: E501
     if connexion.request.is_json:
         body = Student.from_dict(connexion.request.get_json())  # noqa: E501
         return add(body)
-    return 500, "error"
+    return "error", 500
 
 
 def delete_student(student_id):  # noqa: E501

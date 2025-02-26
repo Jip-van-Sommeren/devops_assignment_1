@@ -52,8 +52,8 @@ paths:
           style: simple
           explode: false
           schema:
-            type: number
-            format: integer
+            type: string
+            format: uuid
       responses:
         "200":
           description: Student deleted successfully.
@@ -108,8 +108,7 @@ components:
       type: object
       properties:
         student_id:
-          type: number
-          format: integer
+          type: string
         first_name:
           type: string
         last_name:
@@ -119,7 +118,6 @@ components:
           items:
             $ref: "#/components/schemas/GradeRecord"
       example:
-        student_id: 0.8008281904610115
         last_name: last_name
         grade_records:
           - grade: 6.0274563
