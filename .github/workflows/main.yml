@@ -2,7 +2,7 @@ name: Build Test and push
 on: [push]
 env:
   IMAGE_NAME: student_service
-  REPO_NAME: jvs99/devops_assignment_1
+  REPO_NAME: jvs99
 
 jobs:
   build:
@@ -58,4 +58,4 @@ jobs:
 
       - name: Push image to docker hub Container Registry
         run: |
-          docker push $REPO_NAME/$IMAGE_NAME
+          docker push $REPO_NAME/$IMAGE_NAME:latest

@@ -1,6 +1,5 @@
 import os
 from pymongo import MongoClient
-from bson.objectid import ObjectId
 import uuid
 
 # Use environment variables to configure MongoDB
