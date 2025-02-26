@@ -1,41 +1,54 @@
 import os
-import tempfile
-from functools import reduce
+from pymongo import MongoClient
+from bson.objectid import ObjectId
 
-from tinydb import TinyDB, Query
+# Use environment variables to configure MongoDB
+MONGO_URI = os.environ.get("MONGO_URI", "mongodb://localhost:27017")
+MONGO_DB = os.environ.get("MONGO_DB", "students_db")
+MONGO_COLLECTION = os.environ.get("MONGO_COLLECTION", "students")
 
-db_dir_path = tempfile.gettempdir()
-db_file_path = os.path.join(db_dir_path, "students.json")
-student_db = TinyDB(db_file_path)
+client = MongoClient(MONGO_URI)
+db = client[MONGO_DB]
+students_collection = db[MONGO_COLLECTION]
 
 
 def add(student=None):
-    queries = []
-    query = Query()
-    queries.append(query.first_name == student.first_name)
-    queries.append(query.last_name == student.last_name)
-    query = reduce(lambda a, b: a & b, queries)
-    res = student_db.search(query)
-    if res:
+    # Check if a student with the same first and last name already exists
+    existing = students_collection.find_one(
+        {"first_name": student.first_name, "last_name": student.last_name}
+    )
+    if existing:
         return "already exists", 409
 
-    doc_id = student_db.insert(student.to_dict())
-    student.student_id = doc_id
+    # Convert student object to dict and insert into MongoDB
+    student_dict = student.to_dict()
+    result = students_collection.insert_one(student_dict)
+    # Set the student_id to the MongoDB _id (converted to string)
+    student.student_id = str(result.inserted_id)
     return student.student_id
 
 
 def get_by_id(student_id=None, subject=None):
-    student = student_db.get(doc_id=int(student_id))
+    try:
+        # Look up the student by _id (converted from string to ObjectId)
+        student = students_collection.find_one({"_id": ObjectId(student_id)})
+    except Exception:
+        return "invalid id", 400
+
     if not student:
         return "not found", 404
-    student["student_id"] = student_id
-    print(student)
+
+    # Add the string version of _id to the returned document
+    student["student_id"] = str(student["_id"])
     return student
 
 
 def delete(student_id=None):
-    student = student_db.get(doc_id=int(student_id))
-    if not student:
+    try:
+        result = students_collection.delete_one({"_id": ObjectId(student_id)})
+    except Exception:
+        return "invalid id", 400
+
+    if result.deleted_count == 0:
         return "not found", 404
-    student_db.remove(doc_ids=[int(student_id)])
     return student_id
