@@ -25,8 +25,8 @@ paths:
           style: simple
           explode: false
           schema:
-            type: number
-            format: integer
+            type: string
+            format: uuid
       responses:
         "200":
           description: "Successful operation"
@@ -52,8 +52,8 @@ paths:
           style: simple
           explode: false
           schema:
-            type: number
-            format: intger
+            type: string
+            format: uuid
       responses:
         "200":
           description: "Successful operation"
@@ -81,7 +81,7 @@ paths:
               $ref: "#/components/schemas/Student"
       responses:
         "200":
-          description: created
+          description: "Successful operation"
           content:
             application/json:
               schema:
@@ -101,9 +101,9 @@ components:
         - last_name
       type: object
       properties:
-        student_id:
-          type: number
-          format: integer
+        schema:
+          type: string
+          format: uuid
         first_name:
           type: string
         last_name:

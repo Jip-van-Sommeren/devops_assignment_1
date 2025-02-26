@@ -23,11 +23,10 @@ def add(student=None):
 
     # Convert student object to dict and insert into MongoDB
     student_dict = student.to_dict()
-    # student_dict["student_id"] = str(uuid.uuid4())
-    print(student_dict)
+    student_dict["student_id"] = str(uuid.uuid4())
     _ = students_collection.insert_one(student_dict)
     # Set the student_id to the MongoDB _id (converted to string)
-    return student.student_id, 200
+    return student_dict["student_id"]
 
 
 def get_by_id(student_id=None, subject=None):
