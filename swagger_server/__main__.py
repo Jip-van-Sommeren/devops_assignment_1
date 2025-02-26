@@ -6,10 +6,10 @@ from swagger_server import encoder
 
 
 def main():
-    app = connexion.App(__name__, specification_dir="")
+    app = connexion.App(__name__, specification_dir="./swagger/")
     app.app.json_encoder = encoder.JSONEncoder
     app.add_api(
-        "swagger_server/swagger/swagger.yaml",
+        "swagger.yaml",
         arguments={"title": "Simple Inventory API"},
         pythonic_params=True,
     )
